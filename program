@@ -1,0 +1,75 @@
+import os
+
+def validate(file_name):
+    return file_name in os.listdir(os.getcwd())
+
+def create_file():
+    file_name=raw_input('Enter file name: ') + '.txt'
+    if validate(file_name):
+        ans=raw_input('Such file exist, do you want to overwrite? Y or N \n')
+        if ans in 'nN':
+            print_dir()
+            return
+    else:
+        f=open(file_name,'w')
+        f.write('Some text')
+        f.close()
+
+def delete_file():
+    file_name=raw_input('What file do you want to delete? ') + '.txt'
+    if validate(file_name):
+        os.remove(file_name)
+        print 'Deleted'
+    else:
+        print 'Not such file'
+        
+def create_dir():
+    dir_name=raw_input('enter the directory name : ')
+    if validate(dir_name):
+        ans=raw_input('Such directory exist, do you want to overwrite? Y or N \n')
+        if ans in 'nN':
+            print_dir()
+            return
+        else:
+            os.mkdir(ans)
+
+def delete_dir():
+    dir_name=raw_input('What directory do you want to delete')
+    if validate(dir_name):
+        os.remove(dir_name)
+        print 'Deleted'
+    else:
+        print 'Not such directory'
+                    
+def print_dir():
+    print "Items in dir: \n %s" %("\n".join(os.listdir(os.getcwd())))
+
+def rename_file():
+    dir_name = raw_input('Enter name of directory: ')
+    try:
+        os.mkdir(dir_name)
+    except OSError:
+        print 'Dir already exists'
+
+#def reload_file():
+    
+    
+
+actions={'c':create_file, 'd': delete_file , 'l': print_dir , 'm':create_dir, 'b':delete_dir, 'r':rename_file}
+    
+while True:
+    ans=raw_input('What to do?\n' +
+                  " 'n' to exit"+
+                   " 'c' to create file " +
+                    "'d' to delete file " +
+                     "'l' to list current dir "+
+                      "'m' to create directory "+
+                      "'b' to delete directory " +
+                      "'r' to rename file")
+    if ans in 'nN':
+        break
+    elif ans in actions:
+        actions[ans]()
+    else:
+        print 'Unknown symbol'
+print 'Exited'

@@ -1,0 +1,50 @@
+class CashRegister(object):
+##demo dannue
+    storage={'water':[10,5.50],'milk':[20,9.99],'tea':[30,15.50]}
+    total_cash=0
+    last=[]
+    
+    def buy(self,name,qty):
+        if qty> self.storage[name][0]:
+            print 'Net takogo koli4estva tovara, mogete kupit %i edinits' %(self.storage[name][0])
+        else:
+            self.storage[name][0] = self.storage[name][0] - qty
+            self.total_cash = self.total_cash+ self.storage[name][1]* qty
+            tmp=self.storage[name][1]* qty
+            print self.total_cash
+            self.last=[name, qty, tmp]
+        print self.last
+        
+    def cancel(self):
+        self.storage[self.last[0]][0]+= self.last[1]
+        self.total_cash-=self.last[2]
+        print self.storage[self.last[0]][0]
+        print 'Otmena pokupki'
+        
+    def add_product(self, name, qty, price):
+        if name in self.storage:
+            self.storage[name][0]+= qty
+        else:
+            self.storage[name]= [qty,price]
+        print self.storage
+
+    def change_price(self,name,price):
+        self.storage[name][1]=price
+        print self.storage[name][1]
+
+    def print_storage(self):
+        print "---------------STORAGE-----------------------"
+        for item in self.storage:
+            print '%i of %s for %.2f each' %(self.storage[item][0],item,self.storage[item][1])
+        print "---------------------------------------------"
+s=CashRegister()
+s.buy('milk',10)
+s.cancel()
+print s.total_cash
+s.add_product('milk',10,9.80)
+s.add_product('apple',100,10.20)
+print s.storage
+s.change_price('milk',10.50)
+print s.storage
+s.print_storage()
+##s.buy('apple',4)    

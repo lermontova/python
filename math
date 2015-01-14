@@ -1,0 +1,23 @@
+cont=True
+while cont==True:
+    x=int(raw_input('vvedite x: '))
+    y=int(raw_input('vvedite y: '))
+    print '1. Summa \n 2.Proizvedenie \n 3.Vuchitanie \n 4.Delenie '
+    action=int(raw_input('vuburite deistvie: '))
+    if (action==1):
+        print x+y
+    elif (action==2):
+        print x*y
+    elif (action==3):
+        print x-y
+    elif (action==4):
+        print x/y
+    else:
+        print 'nekorrectnuy vvod'
+    print 'Press Q for exit and any key for continue:   '
+    val=raw_input('Q or any key')
+    if val=='Q' or val=='q':
+        cont=False
+    else:
+        cont=True
+            
